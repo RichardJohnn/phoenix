@@ -18,7 +18,10 @@ defmodule MyPhoenixAppWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
     get "/hello", HelloController, :index
+    get "/hello/:messanger", HelloController, :show
+
   end
 
   # Other scopes may use custom stacks.
