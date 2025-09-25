@@ -8,6 +8,7 @@ defmodule MyPhoenixAppWeb.Router do
     plug :put_root_layout, html: {MyPhoenixAppWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug MyPhoenixAppWeb.Plugs.Locale, "en"
   end
 
   pipeline :api do
@@ -21,7 +22,6 @@ defmodule MyPhoenixAppWeb.Router do
 
     get "/hello", HelloController, :index
     get "/hello/:messanger", HelloController, :show
-
   end
 
   # Other scopes may use custom stacks.
