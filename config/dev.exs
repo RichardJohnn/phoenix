@@ -1,11 +1,14 @@
 import Config
 
 # Configure your database
-config :myapp, Myapp.Repo,
-  database: Path.expand("../myapp_dev.db", __DIR__),
-  pool_size: 5,
+config :my_phoenix_app, MyPhoenixApp.Repo,
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  database: "my_phoenix_app_dev",
   stacktrace: true,
-  show_sensitive_data_on_connection_error: true
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
@@ -13,17 +16,17 @@ config :myapp, Myapp.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we can use it
 # to bundle .js and .css sources.
-config :myapp, MyappWeb.Endpoint,
+config :my_phoenix_app, MyPhoenixAppWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: {127, 0, 0, 1}, port: String.to_integer(System.get_env("PORT") || "4000")],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "xk5xRN9gIzQxq31vPp1H4AePLtSpt6A2yhgoq0EuLVQFO+Wf7v+y/Irc0EeuFW05",
+  secret_key_base: "nZFzPTkhBNOh08YtDFXIKbvo6i7mA6IiDIcmB14OjG2htp+bC9GQh/Rp7BS/G+7D",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:myapp, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:myapp, ~w(--watch)]}
+    esbuild: {Esbuild, :install_and_run, [:my_phoenix_app, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:my_phoenix_app, ~w(--watch)]}
   ]
 
 # ## SSL Support
@@ -50,18 +53,18 @@ config :myapp, MyappWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :myapp, MyappWeb.Endpoint,
+config :my_phoenix_app, MyPhoenixAppWeb.Endpoint,
   live_reload: [
     web_console_logger: true,
     patterns: [
       ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/myapp_web/(?:controllers|live|components|router)/?.*\.(ex|heex)$"
+      ~r"lib/my_phoenix_app_web/(?:controllers|live|components|router)/?.*\.(ex|heex)$"
     ]
   ]
 
 # Enable dev routes for dashboard and mailbox
-config :myapp, dev_routes: true
+config :my_phoenix_app, dev_routes: true
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :default_formatter, format: "[$level] $message\n"

@@ -1,9 +1,9 @@
-defmodule Myapp.MixProject do
+defmodule MyPhoenixApp.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :myapp,
+      app: :my_phoenix_app,
       version: "0.1.0",
       elixir: "~> 1.15",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -20,7 +20,7 @@ defmodule Myapp.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Myapp.Application, []},
+      mod: {MyPhoenixApp.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -40,15 +40,13 @@ defmodule Myapp.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:decimal, "~> 2.0"},
       {:phoenix, "~> 1.8.0"},
       {:phoenix_ecto, "~> 4.5"},
       {:ecto_sql, "~> 3.13"},
-      {:ecto_sqlite3, ">= 0.0.0"},
+      {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 4.1"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 1.1.0"},
-      {:postgrex, ">= 0.0.0", only: :prod},
       {:lazy_html, ">= 0.1.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.8.3"},
       {:esbuild, "~> 0.10", runtime: Mix.env() == :dev},
@@ -84,10 +82,10 @@ defmodule Myapp.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind myapp", "esbuild myapp"],
+      "assets.build": ["tailwind my_phoenix_app", "esbuild my_phoenix_app"],
       "assets.deploy": [
-        "tailwind myapp --minify",
-        "esbuild myapp --minify",
+        "tailwind my_phoenix_app --minify",
+        "esbuild my_phoenix_app --minify",
         "phx.digest"
       ],
       precommit: ["compile --warning-as-errors", "deps.unlock --unused", "format", "test"]

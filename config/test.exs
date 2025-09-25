@@ -5,20 +5,23 @@ import Config
 # The MIX_TEST_PARTITION environment variable can be used
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
-config :myapp, Myapp.Repo,
-  database: Path.expand("../myapp_test.db", __DIR__),
-  pool_size: 5,
-  pool: Ecto.Adapters.SQL.Sandbox
+config :my_phoenix_app, MyPhoenixApp.Repo,
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  database: "my_phoenix_app_test#{System.get_env("MIX_TEST_PARTITION")}",
+  pool: Ecto.Adapters.SQL.Sandbox,
+  pool_size: System.schedulers_online() * 2
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :myapp, MyappWeb.Endpoint,
+config :my_phoenix_app, MyPhoenixAppWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
-  secret_key_base: "DUsAFaSMJapOhpyTLj16Ou8TYTFloXV6cOpkdE/KSogSSeolMjEpqkRUeMYq/Jkx",
+  secret_key_base: "neE6vdlcEooJFbKZPsWcv0ehDQHx+KrnPetJcmMe36TwV+k87ZroNlWRZsm6WjUa",
   server: false
 
 # In test we don't send emails
-config :myapp, Myapp.Mailer, adapter: Swoosh.Adapters.Test
+config :my_phoenix_app, MyPhoenixApp.Mailer, adapter: Swoosh.Adapters.Test
 
 # Disable swoosh api client as it is only required for production adapters
 config :swoosh, :api_client, false
